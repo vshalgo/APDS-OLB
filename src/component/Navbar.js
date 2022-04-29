@@ -1,27 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-const Navbar = () => {
-    return (
-        <nav className='navbar'>
-            <div className='nav-center'>
-                <ul className='nav-links'>
-                    <li>
-                        <Link to = '/'>Home</Link>
-                    </li>
-                    <li>
-                        <Link to = '/about'>About</Link>
-                    </li>
-                    <li>
-                        <Link to = '/register'>Register My Business</Link>
-                    </li>
-                    <li>
-                        <Link to = '/track-orders'>Track My orders</Link>
-                    </li>
-                    
-                </ul>
-            </div>
-        </nav>
-    )
-}
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 
-export default Navbar
+const Navbar = () => {
+  const [showLinks, setShowLinks] = React.useState(false);
+  return (
+    <nav>
+      <div className="container">
+        <div className="nav-header">
+          <button
+            className="nav-toggle"
+            onClick={() => setShowLinks(!showLinks)}
+          >
+            <FaBars />
+          </button>
+        </div>
+        <div
+          className={`${
+            showLinks ? "links-container show-container" : "links-container"
+          }`}
+        >
+          <ul className="links">
+            <li className="nav-item">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/register/business">Register My Business</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/track-orders">Track My orders</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/business/orders">Create an Order</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

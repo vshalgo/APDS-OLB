@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const RegisterBusiness = () => {
     return (
-        <div>
-            <h2>Register Business</h2>
-        </div>
-    )
-}
+      <section>
+            <h2>Login form</h2>
+            <Link to={'/business/home'}>
+                Home page
+            </Link>
+      </section>
+    );
+};
 
-export default RegisterBusiness
+export default RegisterBusiness;
