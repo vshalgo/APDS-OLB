@@ -85,10 +85,10 @@ const Home = () => {
               </div>
             </div>
             <div className="col-lg-5 col-md-12 col-12">
-              <div className="about-image svg">
+              <div className="about-image">
                 <img
-                  src={require("../images/undraw_on_the_way_re_swjt.svg")}
-                  className="img-fluid"
+                  src="../images/undraw_on_the_way_re_swjt.svg"
+                  // className="img-fluid"
                   alt="svg"
                 />
               </div>

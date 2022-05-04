@@ -647,3 +647,7 @@ Register business page
 }
 
 /* Maps */
+.maps{
+  width: 50vw;
+  height: 50vh;
+}

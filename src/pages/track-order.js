@@ -1,31 +1,18 @@
 // import axios from "axios";
 import React from "react";
-// import { useEffect } from "react";
-// import { useState } from "react";
-// import { useParams } from "react-router-dom";
+import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 
 const TrackOrder = () => {
-//   const url = "http://localhost:6060/orders/reports";
-//   const [single, setSingle] = useState(null);
-//   const { id } = useParams();
-
-//   useEffect(() => {
-//     async function singleOrder() {
-//       const response = await axios.get(url, id).then((res) => res.data);
-//     //   console.log(response.data);
-//       if (response) {
-//         const { item_name, description, price } = response[0];
-
-//         const newOrder = { item_name, description, price };
-//         setSingle(newOrder);
-//       } else {
-//         setSingle(null);
-//       }
-//     }
-//     singleOrder();
-//   }, [id]);
-
-//   const { item_name, description, price } = single;
+  function Map() {
+    return (
+      <GoogleMap
+        defaultZoom={10}
+        defaultCenter={{ lat: -1.292066, lng: 36.821945 }}
+      />
+    );  
+    
+  }
+  const WrappedMap = withScriptjs(withGoogleMap(Map))
   return (
     <section className="section">
       <nav className="navbar navbar-expand-sm navbar-light">
@@ -78,13 +65,24 @@ const TrackOrder = () => {
         <h2>My Orders</h2>
         <div className="underline"></div>
       </div>
-      <div>
-        {/* job info */}
-        {/* <section className="job-info">
+      {/* <div>
+        job info
+        <section className="job-info">
           <h3>{item_name}</h3>
           <h4>{description}</h4>
           <p className="job-date">{price}</p>
-        </section> */}
+        </section>
+      </div> */}
+
+      <div className="maps">
+        <WrappedMap
+          googleMapURL={
+            "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
+          }
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `100%` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
       </div>
     </section>
   );
