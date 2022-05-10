@@ -9,7 +9,6 @@ import { FaBars } from "react-icons/fa";
 const CreateOrder = () => {
   const [modalShow, setModalShow] = useState(false);
   const url = "http://localhost:6060/myOrders";
-  const p_url = "http://localhost:6060/orders/reports";
   const [showLinks, setShowLinks] = React.useState(false);
 
   //connecting to the backend API
@@ -59,17 +58,7 @@ const CreateOrder = () => {
   };
 
   //getting data from the database
-  const [getOrders, setGetOrders] = useState([]);
-
-  async function fetchOrders() {
-    const repost = await axios.get(p_url).then((res) => res.data);
-    return repost;
-  }
-
-  useEffect(() => {
-    fetchOrders().then((res) => setGetOrders(res));
-  }, []);
-  fetchOrders();
+  
 
   //modal
   function MyVerticallyCenteredModal(props) {
@@ -238,24 +227,7 @@ const CreateOrder = () => {
               </Form>
             </div>
           </div>
-          {/* show previous orders */}
-          <div className="stories">
-            {getOrders.map((latest) => {
-              const { id, item_name, customer_name, customer_number, price } =
-                latest;
-              return (
-                <article key={id} className="story">
-                  <h4>{item_name}</h4>
-                  <p>
-                    Customer name: {customer_name} Customer number:{" "}
-                    {customer_number} Price: {price}
-                  </p>
-                  {/* <p>{customer_number}</p>
-                  <p>{price}</p> */}
-                </article>
-              );
-            })}
-          </div>
+          
         </div>
       </div>
     );

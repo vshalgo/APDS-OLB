@@ -4,81 +4,96 @@ import React from 'react'
 const SignUp = () => {
 
   return (
-    <div className='registration-form'>
-         <form>
-            <div className="form-icon">
-                <span><i class="icon icon-user"></i></span>
-            </div>
-            <div className="form-group">
-                <input 
-                type="text" 
-                class="form-control item" 
-                id="username"
-                placeholder="Username"
-                // onChange={handleChange}
-                />
-            </div>
+    <div className="App">
+      <div className="container-fluid ">
+        <div className="row g-0">
+          <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+          <div className="col-md-8 col-lg-6">
+            <div className="login d-flex align-items-center py-5">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-9 col-lg-8 mx-auto">
+                    <h3 className="login-heading mb-4">Welcome!</h3>
 
-            <div className="form-group">
-                <input 
-                type="password" 
-                class="form-control item" 
-                id="password" 
-                placeholder="Password"
-                // onChange={handleChange}
-                />
-            </div>
+                    <form>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="text"
+                          className="form-control "
+                          id="floatingInput"
+                          name="fullName"
+                          placeholder="full name"
+                        />
+                        <label for="floatingInput">Full Name</label>
+                        <span className="text-danger"></span>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="email"
+                          className="form-control "
+                          id="floatingInput"
+                          name="email"
+                          placeholder="name@example.com"
+                        />
+                        <label for="floatingInput">Email address</label>
+                        <span className="text-danger"></span>
+                      </div>
+                      <div className="form-floating mb-3">
+                        <input
+                          type="number"
+                          className="form-control "
+                          id="floatingInput"
+                          name="email"
+                          placeholder="name@example.com"
+                        />
+                        <label for="floatingInput">Phone Number</label>
+                        <span className="text-danger"></span>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input
+                          type="password"
+                          className="form-control "
+                          id="floatingPassword"
+                          name="password"
+                          placeholder="Password"
+                        />
+                        <label for="floatingPassword">Password</label>
+                        <span className="text-danger"></span>
+                      </div>
 
-            <div className="form-group">
-                <input 
-                type="text" 
-                class="form-control item" 
-                id="email" 
-                placeholder="Email"
-                // onChange={handleChange}
-                />
-            </div>
+                      <div className="form-check mb-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="rememberPasswordCheck"
+                        />
+                        <label
+                          className="form-check-label"
+                          for="rememberPasswordCheck"
+                        >
+                          Remember password
+                        </label>
+                      </div>
 
-            <div className="form-group">
-                <input 
-                type="text" 
-                class="form-control item" 
-                id="phone-number" 
-                placeholder="Phone Number"
-                // onChange={handleChange}
-                />
+                      <div className="d-grid">
+                        <button
+                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                          type="button"
+                        >
+                          Sign Up
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div className="form-group">
-                <input 
-                type="text" 
-                class="form-control item" 
-                id="birth-date" 
-                placeholder="Birth Date"
-                // onChange={handleChange}
-                />
-            </div>
-
-            <div className="form-group">
-                <button 
-                type="button" 
-                class="btn btn-block create-account" 
-                >
-                    Create Account
-                </button>
-            </div>
-
-        </form>
-        <div className="social-media">
-            <h5>Sign up with social media</h5>
-            <div className="social-icons">
-                <a href="/"><i class="icon-social-facebook" title="Facebook"></i></a>
-                <a href="/"><i class="icon-social-google" title="Google"></i></a>
-                <a href="/"><i class="icon-social-twitter" title="Twitter"></i></a>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default SignUp

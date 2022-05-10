@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Reports = () => {
+  const p_url = "http://localhost:6060/orders/reports";
+
+  const [getOrders, setGetOrders] = useState([]);
+
+  async function fetchOrders() {
+    const repost = await axios.get(p_url).then((res) => res.data);
+    return repost;
+  }
+
+  useEffect(() => {
+    fetchOrders().then((res) => setGetOrders(res));
+  }, []);
+  fetchOrders();
+
   return (
     <div>
       <nav className="navbar navbar-expand-sm navbar-light">
@@ -49,9 +64,25 @@ const Reports = () => {
           </div>
         </div>
       </nav>
-      <h2>Reports</h2>
+      <div className="stories">
+        {getOrders.map((latest) => {
+          const { id, item_name, customer_name, customer_number, price } =
+            latest;
+          return (
+            <article key={id} className="story">
+              <h4>{item_name}</h4>
+              <p>
+                Customer name: {customer_name} Customer number:{" "}
+                {customer_number} Price: {price}
+              </p>
+              {/* <p>{customer_number}</p>
+                  <p>{price}</p> */}
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
-}
+};
 
-export default Reports
+export default Reports;
