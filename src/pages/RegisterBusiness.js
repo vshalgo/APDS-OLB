@@ -1,7 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const RegisterBusiness = () => {
+  const url = "http://localhost:6060/retail/signup";
+
+  const [full_name, setFull_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone_number, setPhone_number] = useState("");
+  const [business_name, setBusiness_name] = useState("");
+  const [handle, setHandle] = useState("");
+  const [business_description, setBusiness_description] = useState("");
+
+  // const handleChange = (e) => {
+  //   const value = e.target.name;
+  //   setBusiness({
+  //     ...business,
+  //     [e.target.value]: value,
+  //   });
+  // };
+
+  // item_name, address, description, price, clientId, rideId
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const businessData = {
+      full_name: full_name,
+      email: email,
+      password: password,
+      phone_number: phone_number,
+      business_name: business_name,
+      handle: handle,
+      business_description: business_description,
+    };
+
+    // console.log(businessData);
+
+    try {
+      await axios({
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        url: url,
+        data: businessData,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="App">
       <div className="container-fluid ">
@@ -14,49 +68,53 @@ const RegisterBusiness = () => {
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">Welcome!</h3>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="text"
                           className="form-control "
-                          id="floatingInput"
-                          name="fullName"
                           placeholder="full name"
+                          value={full_name}
+                          onChange={(e) => setFull_name(e.target.value)}
                         />
-                        <label for="floatingInput">Full Name</label>
+                        <label>Full Name</label>
                         <span className="text-danger"></span>
                       </div>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="email"
                           className="form-control "
-                          id="floatingInput"
-                          name="email"
                           placeholder="name@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
-                        <label for="floatingInput">Email address</label>
+                        <label>Email address</label>
                         <span className="text-danger"></span>
                       </div>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="number"
                           className="form-control "
-                          id="floatingInput"
-                          name="email"
                           placeholder="name@example.com"
+                          value={phone_number}
+                          onChange={(e) => setPhone_number(e.target.value)}
                         />
-                        <label for="floatingInput">Phone Number</label>
+                        <label>Phone Number</label>
                         <span className="text-danger"></span>
                       </div>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
+                          required
                           type="password"
                           className="form-control "
-                          id="floatingPassword"
-                          name="password"
                           placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
-                        <label for="floatingPassword">Password</label>
+                        <label>Password</label>
                         <span className="text-danger"></span>
                       </div>
                     </form>
@@ -64,44 +122,51 @@ const RegisterBusiness = () => {
                     <form>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="text"
                           className="form-control "
-                          id="floatingInput"
-                          name="fullName"
                           placeholder="business name"
+                          value={business_name}
+                          onChange={(e) => setBusiness_name(e.target.value)}
                         />
-                        <label for="floatingInput">Business Name</label>
+                        <label>Business Name</label>
                         <span className="text-danger"></span>
                       </div>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="text"
                           className="form-control "
-                          id="floatingInput"
-                          name="fullName"
                           placeholder="@ig_handle"
+                          value={handle}
+                          onChange={(e) => setHandle(e.target.value)}
                         />
-                        <label for="floatingInput">Instagram Name</label>
+                        <label>Instagram Name</label>
                         <span className="text-danger"></span>
                       </div>
                       <div className="form-floating mb-3">
-                        <input
+                        <textarea
+                          required
                           type="text"
                           className="form-control "
-                          id="floatingInput"
-                          name="fullName"
                           placeholder="description"
-                        />
-                        <label for="floatingInput">Description</label>
+                          value={business_description}
+                          onChange={(e) =>
+                            setBusiness_description(e.target.value)
+                          }
+                        ></textarea>
+                        <label>Description</label>
                         <span className="text-danger"></span>
                       </div>
                       <div className="d-grid">
-                        <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                          type="button"
-                        >
-                          Sign Up
-                        </button>
+                        <Link to="/business/home">
+                          <button
+                            className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                            type="submit"
+                          >
+                            Sign Up
+                          </button>
+                        </Link>
                       </div>
                     </form>
                   </div>

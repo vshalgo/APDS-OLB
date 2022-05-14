@@ -64,7 +64,7 @@ const Reports = () => {
           </div>
         </div>
       </nav>
-      <div className="stories">
+      <div className="container stories">
         {getOrders.map((latest) => {
           const { id, item_name, customer_name, customer_number, price } =
             latest;

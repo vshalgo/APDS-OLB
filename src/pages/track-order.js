@@ -1,8 +1,23 @@
-// import axios from "axios";
-import React from "react";
+import axios from "axios";
+import React, {useState, useEffect} from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 
 const TrackOrder = () => {
+  //get order records
+  const url = "http://localhost:6060/orders/reports";
+  const [orders, setOrders] = useState([]);
+
+  async function fetchOrders() {
+    const repost = await axios.get(url).then((res) => res.data);
+    return repost;
+  }
+
+  useEffect(() => {
+    fetchOrders().then((res) => setOrders(res));
+  }, []);
+  fetchOrders();
+
+  // map function
   function Map() {
     return (
       <GoogleMap
@@ -14,7 +29,7 @@ const TrackOrder = () => {
   }
   const WrappedMap = withScriptjs(withGoogleMap(Map))
   return (
-    <section className="section">
+    <section className="section container-fluid">
       <nav className="navbar navbar-expand-sm navbar-light">
         <div className="container">
           <a className="navbar-brand" href="index.html">
@@ -61,28 +76,44 @@ const TrackOrder = () => {
           </div>
         </div>
       </nav>
-      <div className="title">
+      <div className="title container">
         <h2>My Orders</h2>
         <div className="underline"></div>
-      </div>
-      {/* <div>
-        job info
-        <section className="job-info">
-          <h3>{item_name}</h3>
-          <h4>{description}</h4>
-          <p className="job-date">{price}</p>
-        </section>
-      </div> */}
+        {/* search order bar */}
+        <div className="form-floating mb-3 stories">
+          <input type="number" placeholder="Search by order number" className="form-control" />
+        </div>
 
-      <div className="maps">
-        <WrappedMap
-          googleMapURL={
-            "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
-          }
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+        {/* get my orders here */}
+        <div className="stories">
+          {orders.map((customer) => {
+            const { id, item_name, description, price, address } = customer;
+            return (
+              <article key={id} className="story">
+                <h4>{item_name}</h4>
+                <p>
+                  Description: {description}
+                  Address/Destination: {address}
+                  Price: {price}
+                </p>
+                {/* <p>{customer_number}</p>
+                  <p>{price}</p> */}
+              </article>
+            );
+        })}
+        </div>
+
+        {/* maps */}
+        <div className="maps">
+          <WrappedMap
+            googleMapURL={
+              "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
+            }
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `100%` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
+        </div>
       </div>
     </section>
   );
