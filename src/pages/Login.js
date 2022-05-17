@@ -1,8 +1,34 @@
-import { React } from "react";
+import { React, useState } from "react";
+import axios from "axios";
+import {Link} from 'react-router-dom';
 
 const Login = () => {
-  // const url = '';
-  // const [register, setRegister] = useState();
+  const url = "http://localhost:6060/login";
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const login = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      await axios({
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        url: url,
+        data: login,
+      })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="App">
@@ -19,24 +45,26 @@ const Login = () => {
                     <form>
                       <div className="form-floating mb-3">
                         <input
+                          required
                           type="email"
                           className="form-control "
-                          id="floatingInput"
-                          name="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           placeholder="name@example.com"
                         />
-                        <label for="floatingInput">Email address</label>
+                        <label>Email address</label>
                         <span className="text-danger"></span>
                       </div>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
+                          required
                           type="password"
                           className="form-control "
-                          id="floatingPassword"
-                          name="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                           placeholder="Password"
                         />
-                        <label for="floatingPassword">Password</label>
+                        <label>Password</label>
                         <span className="text-danger"></span>
                       </div>
 
@@ -44,24 +72,23 @@ const Login = () => {
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          value=""
                           id="rememberPasswordCheck"
                         />
-                        <label
-                          className="form-check-label"
-                          for="rememberPasswordCheck"
-                        >
+                        <label className="form-check-label">
                           Remember password
                         </label>
                       </div>
 
                       <div className="d-grid">
-                        <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                          type="button"
-                        >
-                          Sign in
-                        </button>
+                        <Link to={"/"}>
+                          <button
+                            className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
+                            type="submit"
+                            onSubmit={handleSubmit}
+                          >
+                            Log in
+                          </button>
+                        </Link>
                         <div className="text-center">
                           <a className="small" href="#">
                             Forgot password?

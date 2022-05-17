@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
 
-const Home = () => {
+const HomeRider = () => {
   const [open, setOpen] = useState(false);
   const [openone, setOpenone] = useState(false);
   const [opentwo, setOpentwo] = useState(false);
@@ -32,29 +32,22 @@ const Home = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/rider/home" className="nav-link">
                   <span data-hover="Home">Home</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/register/business" className="nav-link">
-                  <span data-hover="Register Business">Register Business</span>
+                <a href="/myrides" className="nav-link">
+                  <span data-hover="My rides">Find my orders</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/rider/signup" className="nav-link">
-                  <span data-hover="Register as a rider">
-                    Register as a rider
-                  </span>
+                <a href="/rides/reports" className="nav-link">
+                  <span data-hover="Track Order">Reports</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/track-orders" className="nav-link">
-                  <span data-hover="Track Order">Track Orders</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/profile" className="nav-link">
+                <a href="/rider/profile" className="nav-link">
                   <span data-hover="My Profile">My Profile</span>
                 </a>
               </li>
@@ -199,5 +192,4 @@ const Home = () => {
   );
 };
 
-export default Home;
-
+export default HomeRider;

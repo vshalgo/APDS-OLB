@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 
 const TrackOrder = () => {
@@ -24,10 +24,12 @@ const TrackOrder = () => {
         defaultZoom={10}
         defaultCenter={{ lat: -1.292066, lng: 36.821945 }}
       />
-    );  
-    
+    );
   }
-  const WrappedMap = withScriptjs(withGoogleMap(Map))
+  const WrappedMap = withScriptjs(withGoogleMap(Map));
+
+  console.log(orders);
+
   return (
     <section className="section container-fluid">
       <nav className="navbar navbar-expand-sm navbar-light">
@@ -81,26 +83,27 @@ const TrackOrder = () => {
         <div className="underline"></div>
         {/* search order bar */}
         <div className="form-floating mb-3 stories">
-          <input type="number" placeholder="Search by order number" className="form-control" />
+          <input
+            type="number"
+            placeholder="Search by order number"
+            className="form-control"
+          />
         </div>
 
         {/* get my orders here */}
         <div className="stories">
           {orders.map((customer) => {
-            const { id, item_name, description, price, address } = customer;
+            const { id, item_name, description, price} = customer;
             return (
               <article key={id} className="story">
                 <h4>{item_name}</h4>
-                <p>
-                  Description: {description}
-                  Address/Destination: {address}
-                  Price: {price}
-                </p>
+                <p>Description: {description}</p>
+                <p>Price: {price}</p>
                 {/* <p>{customer_number}</p>
                   <p>{price}</p> */}
               </article>
             );
-        })}
+          })};
         </div>
 
         {/* maps */}

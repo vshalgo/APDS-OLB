@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
-const Reports = () => {
-  const p_url = "http://localhost:6060/orders/reports";
-
-  const [getOrders, setGetOrders] = useState([]);
+const RideReports = () => {
+  const url = "http://localhost:6060/orders/reports";
+  const [orders, setOrders] = useState([]);
 
   async function fetchOrders() {
-    const repost = await axios.get(p_url).then((res) => res.data);
+    const repost = await axios.get(url).then((res) => res.data);
     return repost;
   }
 
   useEffect(() => {
-    fetchOrders().then((res) => setGetOrders(res));
+    fetchOrders().then((res) => setOrders(res));
   }, []);
   fetchOrders();
 
   return (
-    <div>
+    <section>
       <nav className="navbar navbar-expand-sm navbar-light">
         <div className="container">
           <a className="navbar-brand" href="/">
@@ -41,22 +39,22 @@ const Reports = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a href="/business/home" className="nav-link">
+                <a href="/rider/home" className="nav-link">
                   <span data-hover="Home">Home</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/business/orders" className="nav-link">
-                  <span data-hover="Create an Order">Create an Order</span>
+                <a href="/myrides" className="nav-link">
+                  <span data-hover="My rides">Find my orders</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/business/reports" className="nav-link">
-                  <span data-hover="Reports">Reports</span>
+                <a href="/rides/reports" className="nav-link">
+                  <span data-hover="Track Order">Reports</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/business/profile" className="nav-link">
+                <a href="/rider/profile" className="nav-link">
                   <span data-hover="My Profile">My Profile</span>
                 </a>
               </li>
@@ -64,25 +62,25 @@ const Reports = () => {
           </div>
         </div>
       </nav>
-      <div className="container stories">
-        {getOrders.map((latest) => {
-          const { id, item_name, description, price } =
-            latest;
+
+      {/* get my orders here */}
+      <div className="stories">
+        {orders.map((customer) => {
+          const { id, item_name, description, price } = customer;
           return (
             <article key={id} className="story">
               <h4>{item_name}</h4>
-              <p>
-                Description: {description}
-              </p>
-              <p>
-                Price: {price}
-              </p>
+              <p>Description: {description}</p>
+              <p>Price: {price}</p>
+              {/* <p>{customer_number}</p>
+                  <p>{price}</p> */}
             </article>
           );
         })}
+        ;
       </div>
-    </div>
+    </section>
   );
 };
 
-export default Reports;
+export default RideReports;

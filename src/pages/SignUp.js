@@ -7,7 +7,6 @@ const SignUp = () => {
 
   // const [validation, setValidation] = useState(false);
 
-  const [id, setId] = useState("");
   const [full_name, setFull_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,6 @@ const SignUp = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     const orderData = {
-      id: id,
       full_name: full_name,
       email: email,
       password: password,
@@ -67,18 +65,6 @@ const SignUp = () => {
                     <h3 className="login-heading mb-4">Welcome!</h3>
 
                     <form onSubmit={handleSubmit}>
-                      <div className="form-floating mb-3">
-                        <input
-                          required
-                          type="number"
-                          className="form-control "
-                          value={id}
-                          placeholder="Customer Id (provided)"
-                          onChange={(e) => setId(e.target.value)}
-                        />
-                        <label>Customer Id</label>
-                        <span className="text-danger"></span>
-                      </div>
                       <div className="form-floating mb-3">
                         <input
                           required

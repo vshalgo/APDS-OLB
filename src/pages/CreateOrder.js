@@ -2,12 +2,12 @@ import axios from "axios";
 import React from "react";
 // import { useEffect } from "react";
 import { useState } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
+// import { Form, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import { FaBars } from "react-icons/fa";
 
 const CreateOrder = () => {
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
   const url = "http://localhost:6060/myOrders";
 
   const [item_name, setItem_name] = useState("");
@@ -55,9 +55,9 @@ const CreateOrder = () => {
       console.log(error);
     }
 
-    redirectUser = () => {
-      this.props.history.push('/')
-    }
+    // redirectUser = () => {
+    //   this.props.history.push('/')
+    // }
   }
 
   //getting data from the database
