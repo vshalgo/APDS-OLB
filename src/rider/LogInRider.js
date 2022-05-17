@@ -1,7 +1,7 @@
 import React from 'react'
 
 const LogInRider = () => {
-  const url = "http://localhost:6060//rider/login";
+  const url = "http://localhost:6060/rider/login";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

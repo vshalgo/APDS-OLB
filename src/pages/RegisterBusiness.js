@@ -159,13 +159,15 @@ const RegisterBusiness = () => {
                         <span className="text-danger"></span>
                       </div>
                       <div className="d-grid">
-                        <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                          type="submit"
-                          onSubmit={handleSubmit}
-                        >
-                          <Link to={"/business/home"}>SignUp</Link>
-                        </button>
+                        <Link to={"/business/home"}>
+                          <button
+                            className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
+                            type="submit"
+                            onSubmit={handleSubmit}
+                          >
+                            Log in
+                          </button>
+                        </Link>
                       </div>
                     </form>
                   </div>
