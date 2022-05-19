@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const url = "http://localhost:6060/signup";
@@ -12,13 +11,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [phone_number, setPhone_number] = useState("");
 
-  // const handleChange = (e) => {
-  //   const value = e.target.name;
-  //   setMyOrder({
-  //     ...myOrder,
-  //     [e.target.value]: value,
-  //   });
-  // };
+  // const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -39,10 +32,12 @@ const SignUp = () => {
         data: orderData,
       })
         .then((response) => {
-          // if (response.status == 200) {
-          //   <Link to='/'>Okay</Link>
-          // }
-          console.log(response);
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          } else {
+            return response.data;
+          }
+          console.log(response.data.accessToken);
         })
         .catch((error) => {
           console.log(error);
@@ -64,7 +59,7 @@ const SignUp = () => {
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">Welcome!</h3>
 
-                    <form onSubmit={handleSubmit}>
+                    <form>
                       <div className="form-floating mb-3">
                         <input
                           required
@@ -128,8 +123,8 @@ const SignUp = () => {
                         <button
                           className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                           type="submit"
+                          onSubmit={handleSubmit}
                         >
-                          {/* <Link to='/' label="handleSubmit">Sign UP</Link> */}
                           Sign Up
                         </button>
                       </div>

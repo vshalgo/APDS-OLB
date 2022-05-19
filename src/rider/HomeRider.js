@@ -38,7 +38,7 @@ const HomeRider = () => {
               </li>
               <li className="nav-item">
                 <a href="/myrides" className="nav-link">
-                  <span data-hover="My rides">Find my orders</span>
+                  <span data-hover="Find my orders">Find my orders</span>
                 </a>
               </li>
               <li className="nav-item">

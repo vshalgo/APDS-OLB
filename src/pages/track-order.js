@@ -1,14 +1,18 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
+import authHeader from "../services/user.service";
 
 const TrackOrder = () => {
+  
   //get order records
   const url = "http://localhost:6060/orders/reports";
   const [orders, setOrders] = useState([]);
 
   async function fetchOrders() {
-    const repost = await axios.get(url).then((res) => res.data);
+    const repost = await axios
+      .get(url, { headers: authHeader() })
+      .then((res) => res.data);
     return repost;
   }
 
@@ -93,7 +97,7 @@ const TrackOrder = () => {
         {/* get my orders here */}
         <div className="stories">
           {orders.map((customer) => {
-            const { id, item_name, description, price} = customer;
+            const { id, item_name, description, price } = customer;
             return (
               <article key={id} className="story">
                 <h4>{item_name}</h4>
@@ -103,7 +107,8 @@ const TrackOrder = () => {
                   <p>{price}</p> */}
               </article>
             );
-          })};
+          })}
+          ;
         </div>
 
         {/* maps */}

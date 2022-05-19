@@ -3,7 +3,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
 
 const BusinessHome = () => {
-  const [showLinks, setShowLinks] = React.useState(false);
+  // const [showLinks, setShowLinks] = React.useState(false);
   const [open, setOpen] = useState(false);
   const [openone, setOpenone] = useState(false);
   const [opentwo, setOpentwo] = useState(false);
@@ -38,8 +38,8 @@ const BusinessHome = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/business/orders" className="nav-link">
-                  <span data-hover="Create an Order">Create an Order</span>
+                <a href="/products" className="nav-link">
+                  <span data-hover="My Products">My Products</span>
                 </a>
               </li>
               <li className="nav-item">

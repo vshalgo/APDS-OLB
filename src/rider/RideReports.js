@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const RideReports = () => {
   const url = "http://localhost:6060/orders/reports";
@@ -62,23 +63,35 @@ const RideReports = () => {
           </div>
         </div>
       </nav>
+      <div className="container">
+        <h2>Previous Deliveries</h2>
+        <div className="underline"></div>
+        {/* search order bar */}
+        <div className="form-floating mb-3 stories">
+          <input
+            type="number"
+            placeholder="Search by order number"
+            className="form-control"
+          />
+        </div>
+        <div className="stories">
+          {orders.map((customer) => {
+            const { id, item_name, description, price } = customer;
+            return (
+              <article key={id} className="story">
+                <h4>{item_name}</h4>
+                <p>Description: {description}</p>
+                <p>Price: {price}</p>
+                {/* <p>{customer_number}</p>
+                  <p>{price}</p> */}
+              </article>
+            );
+          })}
+          ;
+        </div>
+      </div>
 
       {/* get my orders here */}
-      <div className="stories">
-        {orders.map((customer) => {
-          const { id, item_name, description, price } = customer;
-          return (
-            <article key={id} className="story">
-              <h4>{item_name}</h4>
-              <p>Description: {description}</p>
-              <p>Price: {price}</p>
-              {/* <p>{customer_number}</p>
-                  <p>{price}</p> */}
-            </article>
-          );
-        })}
-        ;
-      </div>
     </section>
   );
 };

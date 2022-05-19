@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const RegisterBusiness = () => {
   const url = "http://localhost:6060/retail/signup";
@@ -13,15 +12,6 @@ const RegisterBusiness = () => {
   const [handle, setHandle] = useState("");
   const [business_description, setBusiness_description] = useState("");
 
-  // const handleChange = (e) => {
-  //   const value = e.target.name;
-  //   setBusiness({
-  //     ...business,
-  //     [e.target.value]: value,
-  //   });
-  // };
-
-  // item_name, address, description, price, clientId, rideId
   async function handleSubmit(e) {
     e.preventDefault();
     const businessData = {
@@ -33,9 +23,7 @@ const RegisterBusiness = () => {
       handle: handle,
       business_description: business_description,
     };
-
     // console.log(businessData);
-
     try {
       await axios({
         method: "POST",
@@ -68,7 +56,7 @@ const RegisterBusiness = () => {
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">Welcome!</h3>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="form-floating mb-3">
                         <input
                           required
@@ -159,15 +147,12 @@ const RegisterBusiness = () => {
                         <span className="text-danger"></span>
                       </div>
                       <div className="d-grid">
-                        <Link to={"/business/home"}>
-                          <button
-                            className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
-                            type="submit"
-                            onSubmit={handleSubmit}
-                          >
-                            Log in
-                          </button>
-                        </Link>
+                        <button
+                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                          type="submit"
+                        >
+                          Sign Up
+                        </button>
                       </div>
                     </form>
                   </div>

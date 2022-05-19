@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import axios from "axios";
-import {Link} from 'react-router-dom';
 
 const Login = () => {
-  const url = "http://localhost:6060/login";
+  const url = "http://localhost:6060/login"; //user login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,12 +23,22 @@ const Login = () => {
         url: url,
         data: login,
       })
-        .then((response) => console.log(response))
+        .then((response) => {
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          } else {
+            return response.data;
+          }
+        })
         .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
     }
   }
+
+  // function getCurrentUser() {
+  //   return JSON.parse(localStorage.getItem("user"))
+  // }
 
   return (
     <div className="App">
@@ -80,20 +90,13 @@ const Login = () => {
                       </div>
 
                       <div className="d-grid">
-                        <Link to={"/"}>
-                          <button
-                            className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
-                            type="submit"
-                            onSubmit={handleSubmit}
-                          >
-                            Log in
-                          </button>
-                        </Link>
-                        <div className="text-center">
-                          <a className="small" href="#">
-                            Forgot password?
-                          </a>
-                        </div>
+                        <button
+                          className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
+                          type="submit"
+                          onSubmit={handleSubmit}
+                        >
+                          Log in
+                        </button>
                       </div>
                     </form>
                   </div>

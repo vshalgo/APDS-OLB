@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
+import axios from 'axios';
 
 const Home = () => {
+  const url = "http://localhost:6060/products/all";
+
   const [open, setOpen] = useState(false);
   const [openone, setOpenone] = useState(false);
   const [opentwo, setOpentwo] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  async function getProducts() {
+    const response = await axios.get(url).then((res) => res.data);
+    return response;
+  }
+
+  useEffect(() => {
+    getProducts().then((res) => setProducts(res));
+  }, []);
+  getProducts();
 
   return (
     <section>
@@ -92,19 +106,19 @@ const Home = () => {
               </div>
             </div>
             <div className="col-lg-5 col-md-12 col-12">
-              <div className="about-image">
+              {/* <div className="about-image">
                 <img
-                  src="../images/undraw_on_the_way_re_swjt.svg"
+                  src={require("../images/fast.jpg")}
                   // className="img-fluid"
                   alt="svg"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="project py-5" id="project">
+      <div className="project">
         <div className="container">
           <div className="row">
             <div className="col-lg-11 text-center mx-auto col-12">
@@ -192,6 +206,24 @@ const Home = () => {
                 </Col>
               </Row>
             </div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="text-center product-style">
+            <h2>All products</h2>
+            {products.map((item) => {
+              const { id, name, price } = item;
+              return (
+                <Card style={{ width: "18rem" }} key={id}>
+                  <Card.Img variant="top" src="holder.js/100px180" />
+                  <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>{price}</Card.Text>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+            
           </div>
         </div>
       </div>

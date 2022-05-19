@@ -766,3 +766,13 @@ Profile Page
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
 }
+
+.card-products{
+  margin: 30px 0px 20px 20px;
+  gap: 2rem;
+}
+
+.product-style{
+  display: inline;
+  margin-top: 40rem;
+}

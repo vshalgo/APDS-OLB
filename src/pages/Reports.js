@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Card } from "react-bootstrap";
 
 const Reports = () => {
   const p_url = "http://localhost:6060/orders/reports";
@@ -64,22 +65,34 @@ const Reports = () => {
           </div>
         </div>
       </nav>
-      <div className="container stories">
-        {getOrders.map((latest) => {
-          const { id, item_name, description, price } =
-            latest;
-          return (
-            <article key={id} className="story">
-              <h4>{item_name}</h4>
-              <p>
-                Description: {description}
-              </p>
-              <p>
-                Price: {price}
-              </p>
-            </article>
-          );
-        })}
+      <div className="container">
+        <h2>My Orders</h2>
+        <div className="underline"></div>
+        {/* search order bar */}
+        <div className="form-floating mb-3 stories">
+          <input
+            type="number"
+            placeholder="Search by order number"
+            className="form-control"
+          />
+        </div>
+        <div className="stories">
+          {getOrders.map((latest) => {
+            const { id, item_name, description, price, clientId, riderId } =
+              latest;
+            return (
+              <Card body key={id}>
+                <article>
+                  <h4>{item_name}</h4>
+                  <p>Description: {description}</p>
+                  <p>Price: {price}</p>
+                  {/* <p>{clientId}</p>
+                  <p>{riderId}</p> */}
+                </article>
+              </Card>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
