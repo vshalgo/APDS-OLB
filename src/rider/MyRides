@@ -1,0 +1,193 @@
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { Card } from "react-bootstrap";
+import {
+  GoogleMap,
+  withGoogleMap,
+  withScriptjs,
+  Marker
+} from "react-google-maps";
+import { Link } from "react-router-dom";
+import {
+  Autocomplete,
+  DirectionsRenderer,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+
+const MyRides = () => {
+  const url = "http://localhost:6060/orders/reports";
+  const [rideOrder, setRideOrder] = useState([]);
+
+  async function getOrders() {
+    const response = await axios.get(url).then((res) => res.data);
+    return response;
+  }
+
+  useEffect(() => {
+    getOrders().then((res) => setRideOrder(res));
+  }, []);
+  getOrders();
+
+  // maps implementation
+  const [directions, setDirections] = useState(null);
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
+
+  const originRef = useRef();
+  const destinationRef = useRef();
+
+  const { isLoading } = useJsApiLoader({
+    libraries: ["places"],
+  });
+
+  // if (!isLoading) {
+  //   return <div>Loading...</div>
+  // }
+  const center = { lat: -1.292066, lng: 36.821945 };
+
+  function calculateRoute() {
+    // if (originRef.current.value === "" || destinationRef.current.value === "") {
+    //   return;
+    // }
+    const directionsService = new google.maps.DirectionsService();
+    const result = directionsService.route({
+      origin: originRef.current.value,
+      destination: destinationRef.current.value,
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+    setDirections(result);
+    setDistance(result.route[0].legs[0].distance.text);
+    setDuration(result.route[0].legs[0].duration.text);
+  }
+  //map function
+  function Map() {
+    return (
+      <GoogleMap defaultZoom={10} center={center}>
+        <Marker position={center} />
+        {directions && <DirectionsRenderer directions={directions} />}
+      </GoogleMap>
+    );
+  }
+  const WrappedMap = withScriptjs(withGoogleMap(Map));
+
+  return (
+    <section>
+      <nav className="navbar navbar-expand-sm navbar-light">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            <i className="uil uil-user"></i> APDS-OLB
+          </a>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav mx-auto">
+              <li className="nav-item">
+                <a href="/rider/home" className="nav-link">
+                  <span data-hover="Home">Home</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/myrides" className="nav-link">
+                  <span data-hover="Find mt orders">Find my orders</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/rides/reports" className="nav-link">
+                  <span data-hover="Track Order">Reports</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/rider/profile" className="nav-link">
+                  <span data-hover="My Profile">My Profile</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div className="container">
+        <h2>My delivery details</h2>
+        {/* show added orders */}
+        <div className="stories">
+          {rideOrder.map((item) => {
+            const { id, item_name, price, address, description } = item;
+            return (
+              <Card body key={id}>
+                <h5>Product name: {item_name}</h5>
+                <p>Amount: {price}</p>
+                <p>Description: {description}</p>
+                <p>Location: {address}</p>
+              </Card>
+            );
+          })}
+        </div>
+        {/* delivery */}
+        <div>
+          <h5>Enter delivery detains</h5>
+          <form>
+            <div className="form-floating mb-3">
+              <Autocomplete>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="name"
+                  ref={originRef}
+                />
+              </Autocomplete>
+
+              <label>Current Location</label>
+              <span className="text-danger"></span>
+            </div>
+            <div className="form-floating mb-3">
+              <Autocomplete>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="name"
+                  ref={destinationRef}
+                />
+              </Autocomplete>
+              <label>Destination address</label>
+              <span className="text-danger"></span>
+            </div>
+          </form>
+          <button type="submit" onClick={calculateRoute}>
+            Start delivery
+          </button>
+          <div>
+            <h4>{distance}</h4>
+            <h4>{duration}</h4>
+          </div>
+          <div className="maps">
+            {/* rendering the map without any functionality */}
+            <WrappedMap
+              googleMapURL={
+                "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
+              }
+              loadingElement={<div style={{ width: `100%`, height: `100%` }} />}
+              containerElement={
+                <div style={{ width: `100%`, height: `100%` }} />
+              }
+              mapElement={<div style={{ width: `100%`, height: `100%` }} />}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default MyRides;

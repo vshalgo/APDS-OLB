@@ -102,13 +102,16 @@ const SignUpRider = () => {
                       </div>
                     </form>
                     <div className="d-grid">
-                      <Link to="/rider/home">
-                        <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
-                          type="submit"
-                        >
-                          Sign Up
-                        </button>
+                      <button
+                        className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                        type="submit"
+                      >
+                        <Link to="/rider/home">Sign Up</Link>
+                      </button>
+                    </div>
+                    <div className="text-center">
+                      <Link to={"/rider/login"}>
+                        Already have an account? Log in
                       </Link>
                     </div>
                   </div>

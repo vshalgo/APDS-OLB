@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const ProfileRider = () => {
   const url = "http://localhost:6060/riders/profile";
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState([]);
 
   async function profileDetails() {
     const reports = await axios.get(url).then((res) => res.data);

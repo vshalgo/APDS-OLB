@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LoginBusiness = () => {
   const url = "http://localhost:6060/retail/login";
@@ -87,7 +88,7 @@ const LoginBusiness = () => {
                           type="submit"
                           onSubmit={handleSubmit}
                         >
-                          Log in
+                          <Link to={"/business/home"}>Log in</Link>
                         </button>
                         <div className="text-center">
                           <a className="small" href="#">

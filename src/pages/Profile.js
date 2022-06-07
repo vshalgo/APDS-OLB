@@ -5,10 +5,9 @@ const Profile = () => {
     <div>
       <nav className="navbar navbar-expand-sm navbar-light">
         <div className="container">
-          <a className="navbar-brand" href="index.html">
+          <a className="navbar-brand" href="/">
             <i className="uil uil-user"></i> APDS-OLB
           </a>
-
           <button
             className="navbar-toggler"
             type="button"
@@ -22,26 +21,21 @@ const Profile = () => {
             <span className="navbar-toggler-icon"></span>
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/home" className="nav-link">
                   <span data-hover="Home">Home</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/register/business" className="nav-link">
-                  <span data-hover="Register Business">Register Business</span>
-                </a>
-              </li>
+
               <li className="nav-item">
                 <a href="/track-orders" className="nav-link">
                   <span data-hover="Track Order">Track Orders</span>
                 </a>
               </li>
               <li className="nav-item">
-                <a href="/business/orders" className="nav-link">
+                <a href="/profile" className="nav-link">
                   <span data-hover="My Profile">My Profile</span>
                 </a>
               </li>
@@ -64,7 +58,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="col-md-6">
             <div className="profile-head">
               <h5>Kshiti Ghelani</h5>

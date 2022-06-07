@@ -8,13 +8,13 @@ const CreateOrder = () => {
   const url = "http://localhost:6060/myOrders";
   const p_url = "http://localhost:6060/rider/info";
 
-  const [item_name, setItem_name] = useState("");
+  const [itemName, setItemName] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [clientId, setClientId] = useState("");
   const [rideId, setRideId] = useState("");
-  const [ride, setRide] = useState("");
+  const [ride, setRide] = useState([]);
 
   async function fetchRiders() {
     const report = await axios.get(p_url).then((res) => res.data);
@@ -29,7 +29,7 @@ const CreateOrder = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     const orderData = {
-      item_name: item_name,
+      itemName: itemName,
       address: address,
       description: description,
       price: price,
@@ -110,9 +110,9 @@ const CreateOrder = () => {
           <Col>
             <h5>Available riders</h5>
             {ride.map((item) => {
-              const { id, name, email} = item;
+              const { id, name, email } = item;
               return (
-                <Card body key={id} className="product-style">
+                <Card body key={id}>
                   <h5>{name}</h5>
                   <p>{email}</p>
                 </Card>
@@ -124,15 +124,15 @@ const CreateOrder = () => {
               <div className="col-lg-8 mx-auto">
                 <h2>Create orders for your customer</h2>
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-floating mb-3">
                   <input
                     required
                     type="text"
                     className="form-control "
                     placeholder="item name"
-                    value={item_name}
-                    onChange={(e) => setItem_name(e.target.value)}
+                    value={itemName}
+                    onChange={(e) => setItemName(e.target.value)}
                   />
                   <label>Item Name</label>
                   <span className="text-danger"></span>
@@ -201,7 +201,6 @@ const CreateOrder = () => {
                   <button
                     className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
                     type="submit"
-                    onSubmit={handleSubmit}
                   >
                     Create order
                   </button>

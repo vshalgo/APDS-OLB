@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 const Products = () => {
   const url = "http://localhost:6060/products";
@@ -105,11 +106,12 @@ const Products = () => {
             {product.map((item) => {
               const { id, name, price, status, number } = item;
                 return (
-                  <Card body key={id} className='product-style'>
-                      <h5>Product name: {name}</h5>
-                      <p>Product number: {number}</p>
-                      <p>Product price: {price}</p>
-                      <p>Status: {status}</p>
+                  <Card body key={id}>
+                    <h5>Product name: {name}</h5>
+                    <p>Product number: {number}</p>
+                    <p>Product price: {price}</p>
+                    <p>Status: {status}</p>
+                    <Link to={"/business/orders"}>Create an order</Link>
                   </Card>
                 );
             })}

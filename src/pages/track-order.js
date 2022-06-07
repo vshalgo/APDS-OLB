@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 import authHeader from "../services/user.service";
+import { Card } from "react-bootstrap";
 
 const TrackOrder = () => {
   
@@ -21,16 +22,16 @@ const TrackOrder = () => {
   }, []);
   fetchOrders();
 
-  // map function
-  function Map() {
-    return (
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: -1.292066, lng: 36.821945 }}
-      />
-    );
-  }
-  const WrappedMap = withScriptjs(withGoogleMap(Map));
+  // // map function
+  // function Map() {
+  //   return (
+  //     <GoogleMap
+  //       defaultZoom={10}
+  //       defaultCenter={{ lat: -1.292066, lng: 36.821945 }}
+  //     />
+  //   );
+  // }
+  // const WrappedMap = withScriptjs(withGoogleMap(Map));
 
   console.log(orders);
 
@@ -38,10 +39,9 @@ const TrackOrder = () => {
     <section className="section container-fluid">
       <nav className="navbar navbar-expand-sm navbar-light">
         <div className="container">
-          <a className="navbar-brand" href="index.html">
+          <a className="navbar-brand" href="/">
             <i className="uil uil-user"></i> APDS-OLB
           </a>
-
           <button
             className="navbar-toggler"
             type="button"
@@ -55,19 +55,14 @@ const TrackOrder = () => {
             <span className="navbar-toggler-icon"></span>
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/home" className="nav-link">
                   <span data-hover="Home">Home</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/register/business" className="nav-link">
-                  <span data-hover="Register Business">Register Business</span>
-                </a>
-              </li>
+
               <li className="nav-item">
                 <a href="/track-orders" className="nav-link">
                   <span data-hover="Track Order">Track Orders</span>
@@ -99,20 +94,18 @@ const TrackOrder = () => {
           {orders.map((customer) => {
             const { id, item_name, description, price } = customer;
             return (
-              <article key={id} className="story">
-                <h4>{item_name}</h4>
+              <Card body key={id}>
+                <h5>Product name: {item_name}</h5>
+                <p>Amount: {price}</p>
                 <p>Description: {description}</p>
-                <p>Price: {price}</p>
-                {/* <p>{customer_number}</p>
-                  <p>{price}</p> */}
-              </article>
+              </Card>
             );
           })}
           ;
         </div>
 
         {/* maps */}
-        <div className="maps">
+        {/* <div className="maps">
           <WrappedMap
             googleMapURL={
               "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
@@ -121,7 +114,7 @@ const TrackOrder = () => {
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );

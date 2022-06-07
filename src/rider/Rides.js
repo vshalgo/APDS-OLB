@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Card, Container, Row, Col } from 'react-bootstrap';
-import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
+import React, { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 
 const Rides = () => {
-  const url = "http://localhost:6060/orders/reports";
+  const url = "http://127.0.0.1:5000/predict";
+  const url_p = "http://localhost:6060/orders/reports";
   const [rideOrder, setRideOrder] = useState([]);
 
   async function getOrders() {
-    const response = await axios.get(url).then((res) => res.data);
+    const response = await axios.get(url_p).then((res) => res.data);
     return response;
   }
 
@@ -17,17 +17,28 @@ const Rides = () => {
   }, []);
   getOrders();
 
-  //map function
-  function Map() {
-    return (
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: -1.292066, lng: 36.821945 }}
-      />
-    );
-  }
-  const WrappedMap = withScriptjs(withGoogleMap(Map));
 
+  async function predictTime() {
+    try {
+      await axios({
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        url: url,
+        data: 30
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   return (
     <section>
       <nav className="navbar navbar-expand-sm navbar-light">
@@ -77,7 +88,7 @@ const Rides = () => {
         </div>
       </nav>
       <div className="container">
-        <h2>My order details</h2>
+        <h2>My delivery details</h2>
         {/* show added orders */}
         <div className="stories">
           {rideOrder.map((item) => {
@@ -94,33 +105,31 @@ const Rides = () => {
         </div>
         {/* delivery */}
         <div>
-          <h4>Make a delivery</h4>
-          <Container>
-            <Row>
-              <Col>
-                <div className="maps">
-                  {/* rendering the map without any functionality */}
-                  <WrappedMap
-                    googleMapURL={
-                      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCLwD9gycFHop6mLnuJ54giYPmYRcL2CbQ&callback=initMap"
-                    }
-                    loadingElement={
-                      <div style={{ width: `50%`, height: `100%` }} />
-                    }
-                    containerElement={
-                      <div style={{ width: `50%`, height: `100%` }} />
-                    }
-                    mapElement={
-                      <div style={{ width: `100%`, height: `100%` }} />
-                    }
-                  />
-                </div>
-              </Col>
-              <Col>
-                <h5>Enter delivery detains</h5>
-              </Col>
-            </Row>
-          </Container>
+          <h5>Enter delivery detains</h5>
+          <form>
+            <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="name"
+                />
+
+              <label>Current Location</label>
+              <span className="text-danger"></span>
+            </div>
+            <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="name"
+                />
+              <label>Destination address</label>
+              <span className="text-danger"></span>
+            </div>
+          </form>
+          <button type="submit" onClick={predictTime}>
+            Start delivery
+          </button>
         </div>
       </div>
     </section>

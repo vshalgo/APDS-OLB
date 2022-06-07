@@ -28,7 +28,6 @@ const Home = () => {
           <a className="navbar-brand" href="/">
             <i className="uil uil-user"></i> APDS-OLB
           </a>
-
           <button
             className="navbar-toggler"
             type="button"
@@ -42,26 +41,14 @@ const Home = () => {
             <span className="navbar-toggler-icon"></span>
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/home" className="nav-link">
                   <span data-hover="Home">Home</span>
                 </a>
               </li>
-              <li className="nav-item">
-                <a href="/register/business" className="nav-link">
-                  <span data-hover="Register Business">Register Business</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/rider/signup" className="nav-link">
-                  <span data-hover="Register as a rider">
-                    Register as a rider
-                  </span>
-                </a>
-              </li>
+
               <li className="nav-item">
                 <a href="/track-orders" className="nav-link">
                   <span data-hover="Track Order">Track Orders</span>
@@ -183,7 +170,7 @@ const Home = () => {
                   <Card style={{ width: "18rem" }}>
                     <Card.Img
                       variant="top"
-                      src={require("../images/path.jpg")}
+                      src={require("../images/fast.jpg")}
                     />
                     <Card.Body>
                       <Card.Title>We bring products to you</Card.Title>
@@ -209,22 +196,27 @@ const Home = () => {
           </div>
         </div>
         <div className="container">
-          <div className="text-center product-style">
-            <h2>All products</h2>
-            {products.map((item) => {
-              const { id, name, price } = item;
-              return (
-                <Card style={{ width: "18rem" }} key={id}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                    <Card.Title>{name}</Card.Title>
-                    <Card.Text>{price}</Card.Text>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-            
+          <div className="row">
+            <div className="col-lg-11 text-center mx-auto col-12">
+              <h2>All products</h2>
+              {products.map((item) => {
+                const { id, name, price } = item;
+                return (
+                  <Card style={{ width: "18rem" }} key={id}>
+                    <Card.Img
+                      variant="top"
+                      src={require("../images/landing.jpg")}
+                    />
+                    <Card.Body>
+                      <Card.Title>{name}</Card.Title>
+                      <Card.Text>{price}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
+          {/* <div className="text-center product-style"></div> */}
         </div>
       </div>
     </section>

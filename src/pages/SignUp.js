@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const url = "http://localhost:6060/signup";
@@ -32,12 +33,13 @@ const SignUp = () => {
         data: orderData,
       })
         .then((response) => {
-          if (response.data.accessToken) {
-            localStorage.setItem("user", JSON.stringify(response.data));
-          } else {
-            return response.data;
-          }
-          console.log(response.data.accessToken);
+          // if (response.data.accessToken) {
+          //   // localStorage.setItem("user", JSON.stringify(response.data));
+          // } else {
+          //   return response.data;
+          // }
+          // console.log(response.data.accessToken);
+          console.log(response)
         })
         .catch((error) => {
           console.log(error);
@@ -121,12 +123,17 @@ const SignUp = () => {
 
                       <div className="d-grid">
                         <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                          className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
                           type="submit"
                           onSubmit={handleSubmit}
                         >
-                          Sign Up
+                          <Link to={"/home"}>Sign up</Link>
                         </button>
+                      </div>
+                      <div className="text-center">
+                        <Link to={"/login"}>
+                          Already have an account? Log in
+                        </Link>
                       </div>
                     </form>
                   </div>

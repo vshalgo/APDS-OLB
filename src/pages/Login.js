@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const url = "http://localhost:6060/login"; //user login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -95,8 +95,13 @@ const Login = () => {
                           type="submit"
                           onSubmit={handleSubmit}
                         >
-                          Log in
+                          <Link to={"/home"}>Log in</Link>
                         </button>
+                      </div>
+                      <div className="text-center">
+                        <Link to={"/signup"}>
+                          Don't have an account? Sign up
+                        </Link>
                       </div>
                     </form>
                   </div>

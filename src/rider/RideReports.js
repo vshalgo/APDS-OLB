@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Card } from "react-bootstrap";
 
 const RideReports = () => {
   const url = "http://localhost:6060/orders/reports";
@@ -76,15 +77,14 @@ const RideReports = () => {
         </div>
         <div className="stories">
           {orders.map((customer) => {
-            const { id, item_name, description, price } = customer;
+            const { id, item_name, description, price, address } = customer;
             return (
-              <article key={id} className="story">
-                <h4>{item_name}</h4>
+              <Card body key={id}>
+                <h5>Product name: {item_name}</h5>
+                <p>Amount: {price}</p>
                 <p>Description: {description}</p>
-                <p>Price: {price}</p>
-                {/* <p>{customer_number}</p>
-                  <p>{price}</p> */}
-              </article>
+                <p>Location: {address}</p>
+              </Card>
             );
           })}
           ;

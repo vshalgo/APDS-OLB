@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState} from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const LogInRider = () => {
   const url = "http://localhost:6060/rider/login";
@@ -82,19 +84,18 @@ const LogInRider = () => {
                        </div>
 
                        <div className="d-grid">
-                         <Link to={"/rider/home"}>
-                           <button
-                             className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
-                             type="submit"
-                             onSubmit={handleSubmit}
-                           >
-                             Log in
-                           </button>
-                         </Link>
+                         <button
+                           className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
+                           type="submit"
+                           onSubmit={handleSubmit}
+                         >
+                           <Link to={"/rider/home"}>Log in</Link>
+                         </button>
+
                          <div className="text-center">
-                           <a className="small" href="#">
-                             Forgot password?
-                           </a>
+                           <Link to={"/rider/signup"}>
+                             Don't have an account? Sign up
+                           </Link>
                          </div>
                        </div>
                      </form>

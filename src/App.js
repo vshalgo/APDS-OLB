@@ -19,16 +19,22 @@ import Rides from "./rider/Rides";
 import SignUpRider from "./rider/SignUpRider";
 import RideReports from "./rider/RideReports";
 import Products from "./pages/Products";
+import LandingPage from "./pages/LandingPage";
+import LoginB from "./businessPages/Login";
+import LogInRider from "./rider/LogInRider";
+import Delivery from "./rider/Delivery";
 
 function App() {
   return (
     <BrowserRouter>
       {/* <Navbar /> */}
       <Routes>
+        {/* landing page */}
+        <Route exact path="/" element={<LandingPage />} />
         {/* client UI */}
-        <Route exact path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/track-orders" element={<TrackOrder/>} />
+        <Route path="/track-orders" element={<TrackOrder />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Error />} />
         <Route path="/signup" element={<SignUp />} />
@@ -36,6 +42,7 @@ function App() {
 
         {/* business owner UI */}
         <Route path="/register/business" element={<RegisterBusiness />} />
+        <Route path="/login/business" element={<LoginB />} />
         <Route path="/business/home" element={<BusinessHome />} />
         <Route path="/business/orders" element={<CreateOrder />} />
         <Route path="/business/reports" element={<Reports />} />
@@ -47,7 +54,9 @@ function App() {
         <Route path="/rider/profile" element={<ProfileRider />} />
         <Route path="/myrides" element={<Rides />} />
         <Route path="/rider/signup" element={<SignUpRider />} />
+        <Route path="/rider/login" element={<LogInRider />} />
         <Route path="/rides/reports" element={<RideReports />} />
+        <Route path="/delivery" element={<Delivery />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const RegisterBusiness = () => {
   const url = "http://localhost:6060/retail/signup";
@@ -56,7 +57,7 @@ const RegisterBusiness = () => {
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">Welcome!</h3>
 
-                    <form onSubmit={handleSubmit}>
+                    <form>
                       <div className="form-floating mb-3">
                         <input
                           required
@@ -148,11 +149,17 @@ const RegisterBusiness = () => {
                       </div>
                       <div className="d-grid">
                         <button
-                          className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+                          className="btn btn-lg  btn-login text-uppercase fw-bold mb-2"
                           type="submit"
+                          onSubmit={handleSubmit}
                         >
-                          Sign Up
+                          <Link to={"/business/home"}>Sign up</Link>
                         </button>
+                      </div>
+                      <div className="text-center">
+                        <Link to={"/login/business"}>
+                          Already have an account? Log in
+                        </Link>
                       </div>
                     </form>
                   </div>
